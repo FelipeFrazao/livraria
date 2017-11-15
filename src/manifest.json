@@ -2,9 +2,30 @@
   "short_name": "Goodshelf",
   "name": "Good shelf",
   "start_url": "/",
-  "theme_color": "#f48c5b",
+  "theme_color": "#56AED4",
   "background_color": "#ffffff",
   "display": "standalone",
-  "orientation": "portrait"
-  /// Add icons in next section
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "../assets/favicon/favicon-16x16.ico",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "../assets/favicon/favicon-32x32.ico",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "../assets/favicon/favicon-72x72.ico",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "../assets/favicon/favicon-96x96.ico",
+      "sizes": "96x96",
+      "type": "image/png"
+    }
+  ]
 }
