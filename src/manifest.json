@@ -8,23 +8,28 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "../assets/favicon/favicon-16x16.ico",
+      "src": "../assets/favicon/favicon-16x16.png",
       "sizes": "16x16",
       "type": "image/png"
     },
     {
-      "src": "../assets/favicon/favicon-32x32.ico",
+      "src": "../assets/favicon/favicon-32x32.png",
       "sizes": "32x32",
       "type": "image/png"
     },
     {
-      "src": "../assets/favicon/favicon-72x72.ico",
+      "src": "../assets/favicon/apple-icon-72x72.png",
       "sizes": "72x72",
       "type": "image/png"
     },
     {
-      "src": "../assets/favicon/favicon-96x96.ico",
+      "src": "/assets/favicon/favicon-96x96.png",
       "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/favicon/apple-icon-144x144.png",
+      "sizes": "144x144",
       "type": "image/png"
     }
   ]
