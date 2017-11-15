@@ -1,0 +1,17 @@
+div.col-sm-4 {
+  box-sizing: border-box;
+}
+.thumbnail {
+  max-width: 150px;
+  max-height: 200px;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+.post {
+  background: #fff;
+  margin-bottom: 30px;
+}
+.container {
+  background: #f5f5f5;
+}

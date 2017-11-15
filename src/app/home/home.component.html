@@ -1,0 +1,39 @@
+<!--teste-->
+<!--<p *ngFor="let livro of livros | async">-->
+  <!--{{livro.titulo}}-->
+  <!--{{livro.descricao}}-->
+
+<!--</p>-->
+<div class="mb-5 container">
+
+  <hr />
+  <!--<div class="row">-->
+    <!--<div class="col-md-4" *ngFor="let livro of livros | async">-->
+      <!--<div class="post d-flex align-items-center flex-md-row flex-column">-->
+        <!--<div class="thumbnail d-flex-align-items-center "><img [src]="livro.img" alt="..."></div>-->
+        <!--<div class="info">-->
+          <!--<h4 class="h5">{{livro.titulo}}</h4>-->
+          <!--<p>{{livro.descricao}}</p>-->
+          <!--<p>{{}}</p>-->
+          <!--<a href="" class="read-more">Adicionar ao carrinho <i class="fa fa-long-arrow-right"></i></a>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+  <div class="row">
+    <div class="col-sm-6 mb-3" *ngFor="let livro of livros | async">
+      <div class="">
+        <div  class="col-sm-4 float-left">
+          <img [src]="livro.img" class="img-fluid" alt="">
+        </div>
+        <div class="col-sm-6 d-inline-block p-2">
+          <h4 class="card-title">{{livro.titulo}}</h4>
+          <p class="card-text">{{livro.descricao}}</p>
+          <p class="preco">{{livro.preco | currency: 'BRL':true}}</p>
+          <button class="btn btn-outline-primary">Adicionar ao carrinho</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+</div>
