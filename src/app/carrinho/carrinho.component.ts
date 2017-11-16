@@ -11,9 +11,7 @@ import {ItemCarrinho} from "../shared/item-carrinho.model";
 })
 export class CarrinhoComponent implements OnInit {
 
-  public carrinho: number;
   public itemCarrinho: ItemCarrinho;
-  public dede;
   constructor(private carrinhoService: CarrinhoService) { }
 
   public verificaCarrinho(itens): void {
@@ -27,7 +25,6 @@ export class CarrinhoComponent implements OnInit {
   }
 
   ngOnInit() {
-     this.dede = this.carrinhoService.exibirItens();
     this.verificaCarrinho(this.itemCarrinho);
   }
 }
