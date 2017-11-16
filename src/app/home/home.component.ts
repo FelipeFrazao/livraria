@@ -11,7 +11,7 @@ import {Livro} from "../shared/livro.model";
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   encapsulation: ViewEncapsulation.None,
-  providers: [LivrosService]
+  providers: []
 })
 export class HomeComponent implements OnInit {
 
@@ -19,11 +19,8 @@ export class HomeComponent implements OnInit {
   public livros: Observable<Livro[]>;
 
   constructor(private livrosService: LivrosService, private carrinhoService: CarrinhoService) { }
-  public adicionarAoCarrinho(livro: Livro): void {
-    this.carrinhoService.adicionarAoCarrinho(livro);
-  }
+
   ngOnInit() {
-    this.carrinhoService.exibirItens();
     // atribuição dos dados na variavel
     this.livros = this.livrosService.livros;
   }

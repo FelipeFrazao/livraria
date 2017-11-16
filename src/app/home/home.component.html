@@ -32,7 +32,7 @@
           <p class="preco">{{livro.preco | currency: 'BRL':true}}</p>
           <p>{{livro.codigo}}</p>
           <p>{{livro.au}}</p>
-          <button class="btn btn-outline-primary" (click)="adicionarAoCarrinho(livro)">Adicionar ao carrinho</button>
+          <button class="btn btn-outline-primary" (click)="carrinhoService.adicionarAoCarrinho(livro)">Adicionar ao carrinho</button>
         </div>
       </div>
     </div>

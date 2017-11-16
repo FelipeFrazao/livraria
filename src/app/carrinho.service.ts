@@ -19,13 +19,16 @@ export class CarrinhoService {
       localStorage.setItem('carrinho', JSON.stringify(this.itens));
     }
   }
+
+
   public totalCarrinho(): number {
     let total: number = 0;
+    this.itens = JSON.parse(localStorage.getItem('carrinho'));
     this.itens.map((item: ItemCarrinho) => {
       total += (item.preco * item.carrinho);
     });
     return total;
-}
+  }
 
   public exibirItens(): ItemCarrinho[] {
     return this.itens;

@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { CartService } from "../cart.service";
 
 @Component({
   selector: 'app-topo',
@@ -9,11 +8,10 @@ import { CartService } from "../cart.service";
 })
 export class TopoComponent implements OnInit {
 
-  constructor(private cartService: CartService) { }
+  constructor() { }
   public carrinho: number;
 
   ngOnInit() {
-    this.cartService.currentCart.subscribe(cart => this.carrinho = cart);
   }
 
 }

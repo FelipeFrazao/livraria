@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { CartService } from "../cart.service";
 import { CarrinhoService } from "../carrinho.service";
 import {ItemCarrinho} from "../shared/item-carrinho.model";
 
@@ -26,5 +25,6 @@ export class CarrinhoComponent implements OnInit {
 
   ngOnInit() {
     this.verificaCarrinho(this.itemCarrinho);
+    this.carrinhoService.totalCarrinho();
   }
 }
