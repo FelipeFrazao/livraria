@@ -2,9 +2,35 @@
   "short_name": "Goodshelf",
   "name": "Good shelf",
   "start_url": "/",
-  "theme_color": "#f48c5b",
+  "theme_color": "#56AED4",
   "background_color": "#ffffff",
   "display": "standalone",
-  "orientation": "portrait"
-  /// Add icons in next section
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "../assets/favicon/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "../assets/favicon/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "../assets/favicon/apple-icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/favicon/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/favicon/apple-icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ]
 }

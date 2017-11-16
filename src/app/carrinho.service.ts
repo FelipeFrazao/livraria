@@ -12,6 +12,7 @@ export class CarrinhoService {
     let itemCarrinhoEncontrado = this.itens.find((item: ItemCarrinho) => item.titulo === itemCarrinho.titulo);
     if (itemCarrinhoEncontrado) {
       itemCarrinhoEncontrado.carrinho ++;
+      localStorage.setItem('carrinho', JSON.stringify(this.itens));
     } else {
       this.itens.push(itemCarrinho);
       console.log(this.itens);
