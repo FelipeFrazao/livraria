@@ -30,7 +30,9 @@
           <h4 class="card-title">{{livro.titulo}}</h4>
           <p class="card-text">{{livro.descricao}}</p>
           <p class="preco">{{livro.preco | currency: 'BRL':true}}</p>
-          <button class="btn btn-outline-primary">Adicionar ao carrinho</button>
+          <p>{{livro.codigo}}</p>
+          <p>{{livro.au}}</p>
+          <button class="btn btn-outline-primary" (click)="adicionarAoCarrinho(livro)">Adicionar ao carrinho</button>
         </div>
       </div>
     </div>

@@ -1,3 +1,29 @@
-<p>
-  carrinho works!
-</p>
+<div *ngFor="let item of itemCarrinho" class="form-row">
+  <div class="form-group col-sm-1">
+    <img src="" class="img-fluid">
+  </div>
+  <div class="form-group col-sm-6">
+    <h5>{{item.titulo}}</h5>
+  </div>
+
+  <div>
+    <div class="row">
+      <div class="col">
+        <button type="button" class="btn btn-link">-</button>
+        {{item.carrinho}}
+        <button type="button" class="btn btn-link">+</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group col-sm-3 d-flex justify-content-end">
+    <h5>{{item.carrinho * item.preco | currency: 'BRL':true}}</h5>
+  </div>
+</div>
+
+<div class="form-row">
+  <div class="form-group col d-flex justify-content-end">
+    <h4>Total do pedido: 61.80</h4>
+  </div>
+</div>
+<br />

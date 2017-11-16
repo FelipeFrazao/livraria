@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CartService } from "../cart.service";
+import { CarrinhoService } from "../carrinho.service";
+import {ItemCarrinho} from "../shared/item-carrinho.model";
 
 @Component({
   selector: 'app-carrinho',
@@ -10,17 +12,22 @@ import { CartService } from "../cart.service";
 export class CarrinhoComponent implements OnInit {
 
   public carrinho: number;
+  public itemCarrinho: ItemCarrinho;
+  public dede;
+  constructor(private cartService: CartService, private carrinhoService: CarrinhoService) { }
 
-  constructor(private cartService: CartService) { }
-
-  public pegaCart(car): void {
-    this.cartService.updateCart(car);
-    console.log(car);
+  public verificaCarrinho(itens): void {
+    itens = localStorage.getItem('carrinho');
+    if (itens != null) {
+      this.itemCarrinho = JSON.parse(itens);
+      console.log(this.itemCarrinho);
+    } else {
+      console.log("Não há nada no carrinho");
+    }
   }
 
   ngOnInit() {
-    this.cartService.currentCart.subscribe(cart => this.carrinho = cart);
-    this.pegaCart(this.carrinho);
+    // console.log(this.carrinhoService.exibirItens());
+    this.verificaCarrinho(this.itemCarrinho);
   }
-
 }

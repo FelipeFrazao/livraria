@@ -13,6 +13,7 @@ import { AngularFirestoreModule} from "angularfire2/firestore";
 import { AngularFireModule } from 'angularfire2';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {CartService} from "./cart.service";
+import {CarrinhoService} from "./carrinho.service";
 
 
 export const firebaseConfig = {
@@ -40,7 +41,7 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule.enablePersistence()
   ],
-  providers: [CartService],
+  providers: [CartService, CarrinhoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
