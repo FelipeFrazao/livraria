@@ -19,19 +19,13 @@ export class HomeComponent implements OnInit {
   public livros: Observable<Livro[]>;
 
   constructor(private livrosService: LivrosService, private carrinhoService: CarrinhoService) { }
-
+  public adicionarAoCarrinho(livro: Livro): void {
+    this.carrinhoService.adicionarAoCarrinho(livro);
+  }
   ngOnInit() {
-
     this.carrinhoService.exibirItens();
     // atribuição dos dados na variavel
     this.livros = this.livrosService.livros;
-  }
-  // Metodo para adicionar livros ao carrinho
-  public adicionarAoCarrinho(livro: Livro): void {
-    livro.carrinho ++;
-    this.carrinhoService.itens.push(livro);
-    console.log(livro.carrinho);
-    localStorage.setItem('carrinho', JSON.stringify(this.carrinhoService.itens));
   }
 
 }

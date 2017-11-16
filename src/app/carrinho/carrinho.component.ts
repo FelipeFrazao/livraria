@@ -14,7 +14,7 @@ export class CarrinhoComponent implements OnInit {
   public carrinho: number;
   public itemCarrinho: ItemCarrinho;
   public dede;
-  constructor(private cartService: CartService, private carrinhoService: CarrinhoService) { }
+  constructor(private carrinhoService: CarrinhoService) { }
 
   public verificaCarrinho(itens): void {
     itens = localStorage.getItem('carrinho');
@@ -27,7 +27,7 @@ export class CarrinhoComponent implements OnInit {
   }
 
   ngOnInit() {
-    // console.log(this.carrinhoService.exibirItens());
+     this.dede = this.carrinhoService.exibirItens();
     this.verificaCarrinho(this.itemCarrinho);
   }
 }
