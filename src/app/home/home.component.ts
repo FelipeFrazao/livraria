@@ -21,7 +21,6 @@ export class HomeComponent implements OnInit {
   constructor(private livrosService: LivrosService, private carrinhoService: CarrinhoService) { }
 
   ngOnInit() {
-    this.carrinhoService.exibirItens();
     // atribuição dos dados na variavel
     this.livros = this.livrosService.livros;
   }

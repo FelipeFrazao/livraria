@@ -14,18 +14,7 @@ export class CarrinhoComponent implements OnInit {
   public itemCarrinho: ItemCarrinho;
   constructor(public carrinhoService: CarrinhoService) { }
 
-  public verificaCarrinho(itens): void {
-    itens = localStorage.getItem('carrinho');
-    if (itens != null) {
-      this.itemCarrinho = JSON.parse(itens);
-      console.log(this.itemCarrinho);
-    } else {
-      console.log("Não há nada no carrinho");
-    }
-  }
 
   ngOnInit() {
-    // this.verificaCarrinho(this.itemCarrinho);
-    this.itens = this.carrinhoService.exibirItens();
   }
 }
