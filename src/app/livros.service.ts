@@ -15,5 +15,6 @@ export class LivrosService {
     // conexão com o firebase, atribuindo os valores da api nas variaveis
     this.LivroCollection = this.afs.collection<Livro>('livros');
     this.livros = this.LivroCollection.valueChanges();
+    console.log();
   }
 }

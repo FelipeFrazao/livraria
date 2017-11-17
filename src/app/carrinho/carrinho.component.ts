@@ -10,8 +10,9 @@ import {ItemCarrinho} from "../shared/item-carrinho.model";
 })
 export class CarrinhoComponent implements OnInit {
 
+  public itens;
   public itemCarrinho: ItemCarrinho;
-  constructor(private carrinhoService: CarrinhoService) { }
+  constructor(public carrinhoService: CarrinhoService) { }
 
   public verificaCarrinho(itens): void {
     itens = localStorage.getItem('carrinho');
@@ -24,7 +25,7 @@ export class CarrinhoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.verificaCarrinho(this.itemCarrinho);
-    this.carrinhoService.totalCarrinho();
+    // this.verificaCarrinho(this.itemCarrinho);
+    this.itens = this.carrinhoService.exibirItens();
   }
 }
