@@ -1,12 +1,14 @@
-# Livraria
+# Good Shelf
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.0.
+
+This project is a PWA.
 
 Firebase API with Cloud Firestore
 
 ## Dependencies 
 
-"@angular/animations": "^5.0.0",
+    "@angular/animations": "^5.0.0",
     "@angular/common": "^5.0.0",
     "@angular/compiler": "^5.0.0",
     "@angular/core": "^5.0.0",
@@ -23,8 +25,10 @@ Firebase API with Cloud Firestore
     "font-awesome": "^4.7.0",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.14"
-    
+  
+  
     ## Dev dependencies
+    
     
     "@angular/cli": "1.5.0",
     "@angular/compiler-cli": "^5.0.0",
