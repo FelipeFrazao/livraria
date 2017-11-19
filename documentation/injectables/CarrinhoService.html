@@ -519,7 +519,7 @@
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/carrinho.service.ts:59</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/carrinho.service.ts:58</a></div>
                                         </td>
                                     </tr>
             
@@ -581,7 +581,7 @@
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/carrinho.service.ts:71</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/carrinho.service.ts:70</a></div>
                                         </td>
                                     </tr>
             
@@ -961,9 +961,8 @@ export class CarrinhoService {
   }
 
   public removerDoCarrinho(item: ItemCarrinho): void {
-    // Atribui a variavel indice o valor do indice do item selecionado remove do array e atualiza o localstorage
-    let indice: number &#x3D; this.itens.findIndex(x &#x3D;&gt; x.titulo &#x3D;&#x3D;&#x3D; item.titulo);
-    this.itens.splice(indice, 1);
+    // encontra o item selecionado no array o remove e, atualiza o localstorage
+    this.itens.splice(this.itens.indexOf(item), 1);
     this.porNoLocalStorage(this.itens);
   }
 
@@ -987,6 +986,10 @@ export class CarrinhoService {
     if (itemCarrinhoEncontrado) {
       itemCarrinhoEncontrado.carrinho -&#x3D; 1;
       this.porNoLocalStorage(this.itens);
+
+      if (itemCarrinhoEncontrado.carrinho &#x3D;&#x3D;&#x3D; 0) {
+        this.removerDoCarrinho(itemCarrinhoEncontrado);
+      }
     }
   }
 }
