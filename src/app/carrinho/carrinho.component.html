@@ -1,29 +1,49 @@
-<div *ngFor="let item of carrinhoService.exibirItens()" class="form-row">
-  <div class="form-group col-sm-1">
-    <img src="" class="img-fluid">
-  </div>
-  <div class="form-group col-sm-6">
-    <h5>{{item.titulo}}</h5>
-  </div>
-  <div>
-    <div class="row">
-      <div class="col">
-        <button type="button" class="btn btn-link">-</button>
-        {{item.carrinho}}
-        <button type="button" class="btn btn-link">+</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="form-group col-sm-3 d-flex justify-content-end">
-    <button (click)="carrinhoService.removerDoCarrinho(item)" class="d-block">Remover</button>
-    <h5>{{item.carrinho * item.preco | currency: 'BRL':true}}</h5>
-  </div>
-</div>
-
-<div class="form-row">
-  <div class="form-group col d-flex justify-content-end">
-    <h4>Total do pedido: {{carrinhoService.totalCarrinho() | currency: 'BRL':true}}</h4>
-  </div>
-</div>
-<br />
+<h2 class="text-center">Carrinho de Compras</h2>
+<table class="text-center table table-responsive-lg">
+  <thead>
+  <tr>
+    <th scope="col"> </th>
+    <th scope="col">Produto</th>
+    <th scope="col">Quantidade</th>
+    <th scope="col">Subtotal</th>
+    <th scope="col"> </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of carrinhoService.exibirItens(); trackBy: trackByFn">
+    <td><img [src]="item.img" class="cart"></td>
+    <td>
+      {{item.titulo}}
+    </td>
+    <td>
+      <button type="button" (click)="diminuir(item)" class="btn btn-link">-</button>
+      {{item.carrinho}}
+      <button type="button" (click)="aumentar(item)" class="btn btn-link">+</button>
+    </td>
+    <td>{{item.carrinho * item.preco | currency: 'BRL': 'symbol'}}</td>
+    <td>
+      <button class="btn btn-outline-danger rounded-circle" (click)="carrinhoService.removerDoCarrinho(item)">
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
+    </td>
+  </tr>
+  <tr class="mr-5">
+    <td colspan="2"><h4>Total do pedido:</h4></td>
+    <td colspan="2"><h5 class="float-right">{{carrinhoService.totalCarrinho() | currency: 'BRL': 'symbol'}}</h5></td>
+    <td></td>
+  </tr>
+  </tbody>
+  <tfoot>
+  <tr>
+    <td colspan="2">
+      <button routerLink="/" class="btn btn-outline-primary">
+        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+        Continue comprando
+      </button>
+    </td>
+    <td colspan="3">
+      <button class="btn btn-outline-success">Checkout</button>
+    </td>
+  </tr>
+  </tfoot>
+</table>

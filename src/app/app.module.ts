@@ -14,6 +14,7 @@ import { AngularFireModule } from 'angularfire2';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {CarrinhoService} from "./carrinho.service";
 import {LivrosService} from "./livros.service";
+import { RodapeComponent } from './rodape/rodape.component';
 
 
 export const firebaseConfig = {
@@ -31,7 +32,8 @@ export const firebaseConfig = {
     AppComponent,
     HomeComponent,
     TopoComponent,
-    CarrinhoComponent
+    CarrinhoComponent,
+    RodapeComponent
   ],
   imports: [
     BrowserModule,

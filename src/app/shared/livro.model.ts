@@ -1,9 +1,12 @@
 export class Livro {
-  public titulo: string;
-  public autor: string;
-  public descricao: string;
-  public editora: string;
-  public preco: number;
-  public carrinho: number;
-  public img: string;
+  constructor (
+
+    public titulo: string,
+  public autor: string,
+  public descricao: string,
+  public editora: string,
+  public preco: number,
+  public carrinho: number,
+  public img: string,
+  ) {}
 }

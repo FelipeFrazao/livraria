@@ -5,11 +5,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "compodoc": "./node_modules/.bin/compodoc -p src/tsconfig.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "pwa": "ng build --prod && sw-precache --root=dist --config=precache-config.js"
+    "pwa": "ng build --prod --aot=true && sw-precache --root=dist --config=precache-config.js"
   },
   "private": true,
   "dependencies": {

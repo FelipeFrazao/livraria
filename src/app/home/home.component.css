@@ -8,10 +8,22 @@ div.col-sm-4 {
   overflow: hidden;
   position: relative;
 }
-.post {
-  background: #fff;
-  margin-bottom: 30px;
-}
 .container {
   background: #f5f5f5;
 }
+
+@media (max-width: 767px) {
+  p {
+    font-size: 16px;
+  }
+}
+@media (min-width: 768px) {
+  p {
+    font-size: 14px;
+  }
+}
+@media (min-width: 992px) {
+  p {
+    font-size: 15px;
+  }
+  }

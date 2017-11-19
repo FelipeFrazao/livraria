@@ -1,3 +1,9 @@
 img.brand {
   width: 90px;
 }
+nav div.container {
+  background: none;
+}
+i.carrinho {
+  color: #007bff;
+}
