@@ -4,6 +4,10 @@ import * as firebase from 'firebase';
 
 @Injectable()
 export class AuthService {
+
+  public exibir: boolean;
+  public tipo: string = 'danger';
+  public mensagem: string;
   public cadUser(usuario: Usuario): void {
 
     firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.senha)
@@ -16,16 +20,35 @@ export class AuthService {
             email: usuario.email,
             nome: usuario.nome
           });
-        console.log("usuario criado");
+        this.exibir = true;
+        this.tipo = 'success';
+        this.mensagem = `Parabéns ${usuario.nome} você foi cadastrado com sucesso!`;
       })
       .catch((error: Error) => {
-        console.log(error);
+        this.exibir = true;
+        this.tipo = 'danger';
+        this.mensagem = `ERRO usuário não cadastrado ${error.message}`;
       });
   }
 
-  public autenticar(email: string, senha: string): void {
-    firebase.auth().signInWithEmailAndPassword(email, senha)
-      .then((response: any) => console.log(response))
-      .catch((error: Error) => console.log(error));
+  public autenticar(email: string, senha: string, nome: string): Promise<any> {
+    return firebase.auth().signInWithEmailAndPassword(email, senha)
+      .then((response: any) => {
+        this.exibir = true;
+        this.tipo = 'success';
+        this.mensagem = `Parabéns ${nome} você foi logado com sucesso!`;
+      })
+      .catch((error: Error) => {
+        this.exibir = true;
+        this.tipo = 'danger';
+        this.mensagem = `ERRO não foi possível efetuar o Login ${error.message}`;
+      });
+  }
+
+  public resetPassword(email: string): any {
+    let auth = firebase.auth();
+    return auth.sendPasswordResetEmail(email)
+      .then(() => console.log("email sent"))
+      .catch((error) => console.log(error));
   }
 }

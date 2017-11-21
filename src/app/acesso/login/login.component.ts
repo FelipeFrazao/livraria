@@ -17,6 +17,12 @@ export class LoginComponent implements OnInit {
   });
   constructor( private  auth: AuthService) { }
 
+  public passReset: boolean = false;
+
+  public resetarSenha() {
+    this.auth.resetPassword(this.formLogin.value['email'])
+      .then(() => this.passReset = true);
+  }
   ngOnInit() {
   }
   public login(): void {

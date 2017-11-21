@@ -11,15 +11,16 @@ import { AuthService } from "../../auth.service";
 })
 export class CadastroComponent implements OnInit {
 
+  constructor(private as: AuthService) { }
+
 
   public formCadastro: FormGroup = new FormGroup({
     'email': new FormControl("", Validators.email),
     'nome': new FormControl("", Validators.minLength(5)),
     'senha': new FormControl("", Validators.minLength(6))
   });
-  constructor(private as: AuthService) { }
 
-  public cadUser(): void {
+  public cadUser(): any {
 
     let usuario: Usuario = new Usuario (
       this.formCadastro.value.nome,

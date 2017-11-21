@@ -25,5 +25,8 @@
     <p class="card-text">
       Tem uma conta? <a href="#" routerLink="login" class="card-link">Faça login</a>
     </p>
+    <p>
+      <ngb-alert *ngIf="this.as.exibir" [dismissible]="false"  [type]="this.as.tipo">{{ this.as.mensagem }}</ngb-alert>
+  </p>
   </div>
 </div>
