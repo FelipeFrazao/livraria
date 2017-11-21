@@ -9,7 +9,7 @@ div.col-sm-4 {
   position: relative;
 }
 .container {
-  background: #f5f5f5;
+  background: white;
 }
 
 @media (max-width: 767px) {

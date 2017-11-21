@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from "@angular/http";
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
@@ -15,6 +16,11 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {CarrinhoService} from "./carrinho.service";
 import {LivrosService} from "./livros.service";
 import { RodapeComponent } from './rodape/rodape.component';
+import { AcessoComponent } from './acesso/acesso.component';
+import { LoginComponent } from './acesso/login/login.component';
+import { CadastroComponent } from './acesso/cadastro/cadastro.component';
+import * as firebase from "firebase";
+import {AuthService} from "./auth.service";
 
 
 export const firebaseConfig = {
@@ -33,17 +39,22 @@ export const firebaseConfig = {
     HomeComponent,
     TopoComponent,
     CarrinhoComponent,
-    RodapeComponent
+    RodapeComponent,
+    AcessoComponent,
+    LoginComponent,
+    CadastroComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(ROUTES),
     NgbModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule.enablePersistence()
+    AngularFirestoreModule.enablePersistence(),
   ],
-  providers: [LivrosService, CarrinhoService],
+  providers: [LivrosService, CarrinhoService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
