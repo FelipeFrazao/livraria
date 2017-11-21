@@ -5,12 +5,11 @@ import * as firebase from 'firebase';
 @Injectable()
 export class AuthService {
   public cadUser(usuario: Usuario): void {
-    console.log(usuario);
 
     firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.senha)
       .then((resposta: any) => {
         // remover a senha do usuario
-        delete usuario.senha
+        delete usuario.senha;
         // registrando os demais dados do usuário
         firebase.firestore().doc(`usuario/${btoa(usuario.email)}`)
           .set({
@@ -22,5 +21,11 @@ export class AuthService {
       .catch((error: Error) => {
         console.log(error);
       });
+  }
+
+  public autenticar(email: string, senha: string): void {
+    firebase.auth().signInWithEmailAndPassword(email, senha)
+      .then((response: any) => console.log(response))
+      .catch((error: Error) => console.log(error));
   }
 }
