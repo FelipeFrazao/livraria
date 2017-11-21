@@ -15,8 +15,9 @@ export class CarrinhoService {
   }
   // Verificando se o item já está no carrinho, e adiciona ou atualiza a quantidade
   public adicionarAoCarrinho(livro: Livro): any {
-    this.itemCarrinho = new ItemCarrinho( livro.titulo, livro.descricao, livro.editora, livro.preco, 1, livro.img);
+    this.itemCarrinho = new ItemCarrinho(livro.UID, livro.titulo, livro.descricao, livro.editora, livro.preco, 1, livro.img);
     this.itemCarrinhoEncontrado = this.itens.find((item: ItemCarrinho) => item.titulo === this.itemCarrinho.titulo);
+    console.log(this.itemCarrinho);
 
     if (this.itemCarrinhoEncontrado) {
       this.itemCarrinhoEncontrado.carrinho ++;

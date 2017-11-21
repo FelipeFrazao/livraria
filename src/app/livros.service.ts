@@ -10,10 +10,14 @@ export class LivrosService {
   // declaração das variaveis que irão receber os dados
   LivroCollection: AngularFirestoreCollection<Livro>;
   livros: Observable<Livro[]>;
+  public docID: string;
 
   constructor (private afs: AngularFirestore) {
     // conexão com o firebase, atribuindo os valores da api nas variaveis
-    this.LivroCollection = this.afs.collection<Livro>('livros');
+    this.LivroCollection = this.afs.collection('livros');
     this.livros = this.LivroCollection.valueChanges();
+    this.livros.subscribe(data => console.log(data) );
+    // console.log(this.afs.doc('livros'));
   }
+
 }

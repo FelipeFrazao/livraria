@@ -9,10 +9,18 @@ export class AuthService {
 
     firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.senha)
       .then((resposta: any) => {
-      console.log("Usuário cadastrado");
+        // remover a senha do usuario
+        delete usuario.senha
+        // registrando os demais dados do usuário
+        firebase.firestore().doc(`usuario/${btoa(usuario.email)}`)
+          .set({
+            email: usuario.email,
+            nome: usuario.nome
+          });
+        console.log("usuario criado");
       })
       .catch((error: Error) => {
-      console.log(error);
+        console.log(error);
       });
   }
 }
