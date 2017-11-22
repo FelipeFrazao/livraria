@@ -1,6 +1,8 @@
+import { Router } from "@angular/router";
 import { Usuario } from "./acesso/usuario.model";
 import {Injectable} from "@angular/core";
 import * as firebase from 'firebase';
+import {log} from "util";
 
 @Injectable()
 export class AuthService {
@@ -9,6 +11,8 @@ export class AuthService {
   public tipo: string = 'danger';
   public mensagem: string;
   public token_id: string;
+  constructor(private router: Router) { }
+
   public cadUser(usuario: Usuario): void {
 
     firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.senha)
@@ -38,10 +42,9 @@ export class AuthService {
       firebase.auth().currentUser.getIdToken()
         .then((idToken: string) => {
         this.token_id = idToken;
+        localStorage.setItem('user', idToken);
+        this.router.navigate(['/']);
         });
-        this.exibir = true;
-        this.tipo = 'success';
-        this.mensagem = `Parabéns você foi logado com sucesso!`;
       })
       .catch((error: Error) => {
         this.exibir = true;
@@ -55,5 +58,14 @@ export class AuthService {
     return auth.sendPasswordResetEmail(email)
       .then(() => console.log("email sent"))
       .catch((error) => console.log(error));
+  }
+  public checaLogin(): boolean {
+    let estaLogado: boolean;
+
+    if (this.token_id === undefined && localStorage.getItem('user') !== null) {
+      this.token_id = localStorage.getItem('user');
+    }
+    estaLogado = this.token_id !== undefined;
+      return estaLogado;
   }
 }

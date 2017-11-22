@@ -1,15 +1,17 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormGroup, FormControl, Validators} from "@angular/forms";
+import { ChangeDetectionStrategy } from "@angular/core";
 import { Usuario } from "../usuario.model";
 import { AuthService } from "../../auth.service";
 
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./cadastro.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class CadastroComponent implements OnInit {
+export class CadastroComponent implements OnInit, OnDestroy {
 
   constructor(private as: AuthService) { }
 
@@ -33,5 +35,8 @@ export class CadastroComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngOnDestroy() {
+    this.as.exibir = false;
+  }
 
 }

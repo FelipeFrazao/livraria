@@ -21,6 +21,8 @@ import { LoginComponent } from './acesso/login/login.component';
 import { CadastroComponent } from './acesso/cadastro/cadastro.component';
 import * as firebase from "firebase";
 import {AuthService} from "./auth.service";
+import {AuthenticationGuard} from "./authentication.guard";
+import { UserComponent } from './user/user.component';
 
 
 export const firebaseConfig = {
@@ -42,7 +44,8 @@ export const firebaseConfig = {
     RodapeComponent,
     AcessoComponent,
     LoginComponent,
-    CadastroComponent
+    CadastroComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,7 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule.enablePersistence(),
   ],
-  providers: [LivrosService, CarrinhoService, AuthService],
+  providers: [LivrosService, CarrinhoService, AuthService, AuthenticationGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

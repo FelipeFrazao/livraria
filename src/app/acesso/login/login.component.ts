@@ -1,15 +1,17 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 
 import {FormGroup, FormControl, Validators} from "@angular/forms";
 import { Usuario } from "../usuario.model";
+import { ChangeDetectionStrategy } from "@angular/core";
 import { AuthService } from "../../auth.service";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./login.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   public formLogin: FormGroup = new FormGroup({
     'email': new FormControl("", Validators.email),
@@ -30,5 +32,8 @@ export class LoginComponent implements OnInit {
       this.formLogin.value.email,
       this.formLogin.value.senha
       );
+  }
+  ngOnDestroy() {
+    this.auth.exibir = false;
   }
 }
