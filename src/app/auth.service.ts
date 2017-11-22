@@ -8,6 +8,7 @@ export class AuthService {
   public exibir: boolean;
   public tipo: string = 'danger';
   public mensagem: string;
+  public token_id: string;
   public cadUser(usuario: Usuario): void {
 
     firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.senha)
@@ -31,12 +32,16 @@ export class AuthService {
       });
   }
 
-  public autenticar(email: string, senha: string, nome: string): Promise<any> {
-    return firebase.auth().signInWithEmailAndPassword(email, senha)
+  public autenticar(email: string, senha: string): void {
+    firebase.auth().signInWithEmailAndPassword(email, senha)
       .then((response: any) => {
+      firebase.auth().currentUser.getIdToken()
+        .then((idToken: string) => {
+        this.token_id = idToken;
+        });
         this.exibir = true;
         this.tipo = 'success';
-        this.mensagem = `Parabéns ${nome} você foi logado com sucesso!`;
+        this.mensagem = `Parabéns você foi logado com sucesso!`;
       })
       .catch((error: Error) => {
         this.exibir = true;

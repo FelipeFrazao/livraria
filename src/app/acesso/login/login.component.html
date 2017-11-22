@@ -2,7 +2,8 @@
   <div class="card-body">
     <div class="card-title"></div>
 
-    <form [formGroup]="formLogin" (ngSubmit)="login()">
+    <form [formGroup]="formLogin" (ngSubmit)="this.auth.autenticar(this.formLogin.value.email,
+      this.formLogin.value.senha)">
       <div class="form-group">
         <input type="email" formControlName="email" class="form-control" placeholder="E-mail">
       </div>
@@ -23,5 +24,8 @@
     <p class="card-text">
       Não tem uma conta? <a href="#" routerLinkActive="active" routerLink="/acesso" class="card-link">Cadastre-se</a>
     </p>
+    <p>
+    <ngb-alert *ngIf="this.auth.exibir" [dismissible]="false"  [type]="this.auth.tipo">{{ this.auth.mensagem }}</ngb-alert>
+  </p>
   </div>
 </div>
