@@ -11,6 +11,7 @@ export class AuthService {
   public tipo: string = 'danger';
   public mensagem: string;
   public token_id: string;
+  public estaLogado: boolean;
   constructor(private router: Router) { }
 
   public cadUser(usuario: Usuario): void {
@@ -20,7 +21,7 @@ export class AuthService {
         // remover a senha do usuario
         delete usuario.senha;
         // registrando os demais dados do usuário
-        firebase.firestore().doc(`usuario/${btoa(usuario.email)}`)
+        firebase.firestore().doc(`usuarios/${btoa(usuario.email)}`)
           .set({
             email: usuario.email,
             nome: usuario.nome
@@ -43,7 +44,7 @@ export class AuthService {
         .then((idToken: string) => {
         this.token_id = idToken;
         localStorage.setItem('user', idToken);
-        this.router.navigate(['/']);
+        this.router.navigate(['/conta']);
         });
       })
       .catch((error: Error) => {
@@ -60,12 +61,19 @@ export class AuthService {
       .catch((error) => console.log(error));
   }
   public checaLogin(): boolean {
-    let estaLogado: boolean;
 
     if (this.token_id === undefined && localStorage.getItem('user') !== null) {
       this.token_id = localStorage.getItem('user');
     }
-    estaLogado = this.token_id !== undefined;
-      return estaLogado;
+    this.estaLogado = this.token_id !== undefined;
+      return this.estaLogado;
   }
+  public logout(): void  {
+    firebase.auth().signOut()
+      .then(() => {
+        localStorage.removeItem('user');
+        this.token_id = undefined;
+        this.router.navigate(['acesso/login']);
+    });
+}
 }

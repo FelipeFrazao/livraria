@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {AuthService} from "../auth.service";
 
 @Component({
   selector: 'app-topo',
@@ -8,10 +9,11 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class TopoComponent implements OnInit {
 
-  constructor() { }
+  constructor(public auths: AuthService) { }
   public carrinho: number;
 
   ngOnInit() {
+    this.auths.checaLogin();
   }
 
 }
