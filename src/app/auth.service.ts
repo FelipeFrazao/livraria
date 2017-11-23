@@ -50,7 +50,7 @@ export class AuthService {
       .catch((error: Error) => {
         this.exibir = true;
         this.tipo = 'danger';
-        this.mensagem = `ERRO não foi possível efetuar o Login ${error.message}`;
+        this.mensagem = `ERRO não foi possível efetuar o login ${error.message}`;
       });
   }
 
@@ -65,6 +65,9 @@ export class AuthService {
     if (this.token_id === undefined && localStorage.getItem('user') !== null) {
       this.token_id = localStorage.getItem('user');
     }
+    if (this.token_id === undefined) {
+      this.router.navigate(['acesso/login']);
+    }
     this.estaLogado = this.token_id !== undefined;
       return this.estaLogado;
   }
@@ -73,7 +76,6 @@ export class AuthService {
       .then(() => {
         localStorage.removeItem('user');
         this.token_id = undefined;
-        this.router.navigate(['acesso/login']);
     });
 }
 }
