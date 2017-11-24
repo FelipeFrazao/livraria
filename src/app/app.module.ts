@@ -23,6 +23,7 @@ import * as firebase from "firebase";
 import {AuthService} from "./auth.service";
 import {AuthenticationGuard} from "./authentication.guard";
 import { UserComponent } from './user/user.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 
 export const firebaseConfig = {
@@ -45,7 +46,8 @@ export const firebaseConfig = {
     AcessoComponent,
     LoginComponent,
     CadastroComponent,
-    UserComponent
+    UserComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,

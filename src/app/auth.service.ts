@@ -2,7 +2,6 @@ import { Router } from "@angular/router";
 import { Usuario } from "./acesso/usuario.model";
 import {Injectable} from "@angular/core";
 import * as firebase from 'firebase';
-import {log} from "util";
 
 @Injectable()
 export class AuthService {
@@ -12,6 +11,7 @@ export class AuthService {
   public mensagem: string;
   public token_id: string;
   public estaLogado: boolean;
+  public user;
   constructor(private router: Router) { }
 
   public cadUser(usuario: Usuario): void {
@@ -21,10 +21,11 @@ export class AuthService {
         // remover a senha do usuario
         delete usuario.senha;
         // registrando os demais dados do usuário
-        firebase.firestore().doc(`usuarios/${btoa(usuario.email)}`)
+        firebase.firestore().doc(`usuario/${btoa(usuario.email)}`)
           .set({
             email: usuario.email,
-            nome: usuario.nome
+            nome: usuario.nome,
+            carrinho: ''
           });
         this.exibir = true;
         this.tipo = 'success';
@@ -40,12 +41,11 @@ export class AuthService {
   public autenticar(email: string, senha: string): void {
     firebase.auth().signInWithEmailAndPassword(email, senha)
       .then((response: any) => {
-      firebase.auth().currentUser.getIdToken()
-        .then((idToken: string) => {
-        this.token_id = idToken;
-        localStorage.setItem('user', idToken);
-        this.router.navigate(['/conta']);
-        });
+        firebase.auth().currentUser.getIdToken()
+          .then((idToken: string) => {
+            this.token_id = idToken;
+            this.router.navigate(['/conta']);
+          });
       })
       .catch((error: Error) => {
         this.exibir = true;
@@ -57,25 +57,29 @@ export class AuthService {
   public resetPassword(email: string): any {
     let auth = firebase.auth();
     return auth.sendPasswordResetEmail(email)
-      .then(() => console.log("email sent"))
+      .then(() => console.log('email sent'))
       .catch((error) => console.log(error));
   }
   public checaLogin(): boolean {
 
-    if (this.token_id === undefined && localStorage.getItem('user') !== null) {
-      this.token_id = localStorage.getItem('user');
+    if (this.token_id === undefined
+      &&
+      localStorage.getItem('firebase:authUser:AIzaSyDd0K4OLAwJ5k3VohRfpmP6_pcYrt1_H2A:[DEFAULT]') !== null) {
+      this.token_id = localStorage.getItem('firebase:authUser:AIzaSyDd0K4OLAwJ5k3VohRfpmP6_pcYrt1_H2A:[DEFAULT]');
     }
     if (this.token_id === undefined) {
       this.router.navigate(['acesso/login']);
     }
     this.estaLogado = this.token_id !== undefined;
-      return this.estaLogado;
+    return this.estaLogado;
   }
   public logout(): void  {
     firebase.auth().signOut()
       .then(() => {
-        localStorage.removeItem('user');
-        this.token_id = undefined;
-    });
-}
+        localStorage.removeItem('firebase:authUser:AIzaSyDd0K4OLAwJ5k3VohRfpmP6_pcYrt1_H2A:[DEFAULT]');
+        this.router.navigate(['acesso/login']);
+        this.estaLogado = false;
+
+      });
+  }
 }

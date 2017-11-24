@@ -80,7 +80,8 @@
     ],
     "prefer-const": false,
     "quotemark": [
-      false
+      true,
+      "single"
     ],
     "radix": true,
     "semicolon": [
@@ -115,7 +116,7 @@
     "directive-selector": [
       true,
       "attribute",
-      "bh",
+      "app",
       "camelCase"
     ],
     "component-selector": [

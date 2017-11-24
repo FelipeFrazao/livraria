@@ -1,6 +1,8 @@
-import { Injectable } from "@angular/core";
-import {ItemCarrinho} from "./shared/item-carrinho.model";
-import { Livro } from "./shared/livro.model";
+import { Injectable } from '@angular/core';
+import {ItemCarrinho} from './shared/item-carrinho.model';
+import { Livro } from './shared/livro.model';
+import {AuthService} from './auth.service';
+import * as firebase from 'firebase';
 
 @Injectable()
 export class CarrinhoService {
@@ -10,8 +12,26 @@ export class CarrinhoService {
   public itemCarrinho: ItemCarrinho;
   public itemCarrinhoEncontrado;
 
-  public porNoLocalStorage(itens: ItemCarrinho[]): void {
-    localStorage.setItem('carrinho', JSON.stringify(itens));
+  constructor (private as: AuthService) { }
+
+  public salvarCarrinho(itens: ItemCarrinho[]): void {
+
+    // if (this.as.estaLogado === true) {
+    //   let user = JSON.parse(localStorage.getItem('firebase:authUser:AIzaSyDd0K4OLAwJ5k3VohRfpmP6_pcYrt1_H2A:[DEFAULT]'));
+    //   let carrinho: any;
+    //   carrinho = itens;
+    //   firebase.firestore().doc(`usuario/${btoa(user.email)}`).collection('carrinho')
+    //     .add({
+    //       titulo: this.itemCarrinho.titulo,
+    //       preco: this.itemCarrinho.preco,
+    //       carrinho: this.itemCarrinho.carrinho,
+    //       descricao: this.itemCarrinho.descricao,
+    //       img: this.itemCarrinho.img,
+    //       editora: this.itemCarrinho.editora
+    //     });
+    // } else {
+       localStorage.setItem('carrinho', JSON.stringify(itens));
+    // }
   }
   // Verificando se o item já está no carrinho, e adiciona ou atualiza a quantidade
   public adicionarAoCarrinho(livro: Livro): any {
@@ -21,10 +41,10 @@ export class CarrinhoService {
 
     if (this.itemCarrinhoEncontrado) {
       this.itemCarrinhoEncontrado.carrinho ++;
-      this.porNoLocalStorage(this.itens);
+      this.salvarCarrinho(this.itens);
     } else {
       this.itens.push(this.itemCarrinho);
-      this.porNoLocalStorage(this.itens);
+      this.salvarCarrinho(this.itens);
     }
   }
 
@@ -53,17 +73,17 @@ export class CarrinhoService {
   public removerDoCarrinho(item: ItemCarrinho): void {
     // encontra o item selecionado no array o remove e, atualiza o localstorage
     this.itens.splice(this.itens.indexOf(item), 1);
-    this.porNoLocalStorage(this.itens);
+    this.salvarCarrinho(this.itens);
   }
 
-  public aumentarQuantidaide(itemCarrinho: ItemCarrinho): void {
+  public aumentarQuantidade(itemCarrinho: ItemCarrinho): void {
 
     // incrementar quantidade
     let itemCarrinhoEncontrado = this.itens.find((item: ItemCarrinho) => item.titulo === itemCarrinho.titulo);
     console.log(itemCarrinhoEncontrado.carrinho);
     if (itemCarrinhoEncontrado) {
       itemCarrinhoEncontrado.carrinho ++;
-      this.porNoLocalStorage(this.itens);
+      this.salvarCarrinho(this.itens);
       console.log(itemCarrinhoEncontrado.carrinho);
     }
   }
@@ -75,7 +95,7 @@ export class CarrinhoService {
 
     if (itemCarrinhoEncontrado) {
       itemCarrinhoEncontrado.carrinho -= 1;
-      this.porNoLocalStorage(this.itens);
+      this.salvarCarrinho(this.itens);
 
       if (itemCarrinhoEncontrado.carrinho === 0) {
         this.removerDoCarrinho(itemCarrinhoEncontrado);

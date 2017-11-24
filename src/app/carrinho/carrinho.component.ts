@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { CarrinhoService } from "../carrinho.service";
-import { ChangeDetectionStrategy } from "@angular/core";
-import { ItemCarrinho } from "../shared/item-carrinho.model";
+import { CarrinhoService } from '../carrinho.service';
+import { ChangeDetectionStrategy } from '@angular/core';
+import { ItemCarrinho } from '../shared/item-carrinho.model';
 
 @Component({
   selector: 'app-carrinho',
@@ -16,7 +16,7 @@ export class CarrinhoComponent implements OnInit {
   constructor(public carrinhoService: CarrinhoService) { }
 
   public aumentar(item: ItemCarrinho): void {
-    this.carrinhoService.aumentarQuantidaide(item);
+    this.carrinhoService.aumentarQuantidade(item);
   }
 
   trackByFn(index, item) {
