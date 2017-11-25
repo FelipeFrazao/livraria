@@ -40,17 +40,20 @@ export class CheckoutComponent implements OnInit {
       if (this.carrinhoService.exibirItens().length === 0) {
         alert('O carrinho está vazio');
       } else {
-        console.log('compra show');
-        let pedido: Pedido = new Pedido(
+        let pedido: Pedido = new Pedido (
           this.formCompra.value.endereco,
           this.formCompra.value.numero,
           this.formCompra.value.complemento,
-          this.formCompra.value.formaPagamento
+          this.formCompra.value.formaPagamento,
+          this.carrinhoService.exibirItens()
         );
-      // this.ordemCompraService.efetivarCompra(pedido)
-      //   .subscribe((idPedido: number) => {
-      //     this.idPedidoCompra = idPedido;
-      //   });
+        this.carrinhoService.finalizarCompra(pedido);
+
+        console.log(pedido);
+        // this.ordemCompraService.efetivarCompra(pedido)
+        //   .subscribe((idPedido: number) => {
+        //     this.idPedidoCompra = idPedido;
+        //   });
       }
     }
   }

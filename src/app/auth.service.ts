@@ -1,6 +1,6 @@
-import { Router } from "@angular/router";
-import { Usuario } from "./acesso/usuario.model";
-import {Injectable} from "@angular/core";
+import { Router } from '@angular/router';
+import { Usuario } from './acesso/usuario.model';
+import {Injectable} from '@angular/core';
 import * as firebase from 'firebase';
 
 @Injectable()

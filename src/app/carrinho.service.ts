@@ -3,6 +3,7 @@ import {ItemCarrinho} from './shared/item-carrinho.model';
 import { Livro } from './shared/livro.model';
 import {AuthService} from './auth.service';
 import * as firebase from 'firebase';
+import {Pedido} from './shared/pedido.model';
 
 @Injectable()
 export class CarrinhoService {
@@ -101,5 +102,25 @@ export class CarrinhoService {
         this.removerDoCarrinho(itemCarrinhoEncontrado);
       }
     }
+  }
+
+
+  public finalizarCompra(pedido: Pedido): any {
+    let email = firebase.auth().currentUser.email;
+    firebase.firestore().doc(`compras/${btoa(email)}`)
+      .set({
+        usuario: email,
+        endereco: pedido.endereco,
+        complemento: pedido.complemento,
+        numero: pedido.numero,
+        formaDePagamento: pedido.formaPagamento,
+        itens: pedido.itens
+      })
+      .then((response) => {
+        console.log(`foi tudo de boa ${response}`);
+      })
+      .catch((erro: Error) => {
+      console.log(`Deu errado ${erro}`);
+      });
   }
 }
