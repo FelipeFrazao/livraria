@@ -7,16 +7,15 @@
       </a>
       </div>
       <h1 routerLink="/" title="Home" routerLinkActive="active" class="text-center">Good Shelf</h1>
-      <a routerLink="/carrinho" title="Carrinho de Compras" routerLinkActive="active"> <i class="fa fa-shopping-cart carrinho fa-2x" aria-hidden="true"></i></a>
-    </div>
-
-    <div ngbDropdown class="d-inline-block">
-      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
-      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-        <button *ngIf="!auths.estaLogado" routerLink="/acesso" title="Cadastrar" routerLinkActive="active" class="dropdown-item">Criar conta<i class="fa  fa-user-circle-o carrinho" aria-hidden="true"></i></button>
-        <button *ngIf="!auths.estaLogado" routerLink="/acesso/login" title="Logar" routerLinkActive="active" class="dropdown-item">Logar</button>
-        <button *ngIf="auths.estaLogado" routerLink="/conta" class="dropdown-item">Conta</button>
-        <button *ngIf="auths.estaLogado" (click)="this.auths.logout()" class="dropdown-item">Sair</button>
+      <div ngbDropdown class="d-inline-block">
+        <a routerLink="/carrinho" title="Carrinho de Compras" routerLinkActive="active"> <i class="fa fa-shopping-cart carrinho fa-2x" aria-hidden="true"></i></a>
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{auths.exibicao}}</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button *ngIf="!auths.estaLogado" routerLink="/acesso" title="Cadastrar" routerLinkActive="active" class="dropdown-item">Criar conta<i class="fa  fa-user-circle-o carrinho" aria-hidden="true"></i></button>
+          <button *ngIf="!auths.estaLogado" routerLink="/acesso/login" title="Logar" routerLinkActive="active" class="dropdown-item">Logar</button>
+          <button *ngIf="auths.estaLogado" routerLink="/conta" class="dropdown-item">Conta</button>
+          <button *ngIf="auths.estaLogado" (click)="this.auths.logout()" class="dropdown-item">Sair</button>
+        </div>
       </div>
     </div>
   </nav>

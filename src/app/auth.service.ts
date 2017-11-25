@@ -11,7 +11,7 @@ export class AuthService {
   public mensagem: string;
   public token_id: string;
   public estaLogado: boolean;
-  public user;
+  public exibicao: string;
   constructor(private router: Router) { }
 
   public cadUser(usuario: Usuario): void {
@@ -71,6 +71,11 @@ export class AuthService {
       this.router.navigate(['acesso/login']);
     }
     this.estaLogado = this.token_id !== undefined;
+    if (this.estaLogado) {
+      this.exibicao = 'Conta';
+    } else {
+      this.exibicao = 'Entrar';
+    }
     return this.estaLogado;
   }
   public logout(): void  {

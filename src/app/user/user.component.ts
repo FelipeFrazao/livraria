@@ -11,10 +11,10 @@ import * as firebase from 'firebase';
   encapsulation: ViewEncapsulation.None
 })
 export class UserComponent implements OnInit {
-  public usuario = firebase.firestore().doc(`usuario/${btoa(firebase.auth().currentUser.email)}`);
+
+  public useremail = firebase.auth().currentUser.email;
   constructor(public auth: AuthService, private afs: AngularFirestore) { }
   ngOnInit() {
-    console.log(this.usuario);
   }
 
 }
