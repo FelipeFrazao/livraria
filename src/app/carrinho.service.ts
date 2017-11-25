@@ -118,6 +118,8 @@ export class CarrinhoService {
       })
       .then((response) => {
         console.log(`foi tudo de boa ${response}`);
+        this.itens = [];
+        localStorage.removeItem('carrinho');
       })
       .catch((erro: Error) => {
       console.log(`Deu errado ${erro}`);
