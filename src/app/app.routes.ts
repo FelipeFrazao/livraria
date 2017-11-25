@@ -19,5 +19,5 @@ export const ROUTES: Routes = [
     {path: 'login', component: LoginComponent}
   ]},
   {path: 'conta', component: UserComponent, canActivate: [ AuthenticationGuard ]},
-  {path: 'checkout', component: CheckoutComponent}
+  {path: 'checkout', component: CheckoutComponent, canActivate: [ AuthenticationGuard ]}
 ];

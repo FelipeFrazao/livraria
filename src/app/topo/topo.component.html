@@ -8,7 +8,7 @@
       </div>
       <h1 routerLink="/" title="Home" routerLinkActive="active" class="text-center">Good Shelf</h1>
       <div ngbDropdown class="d-inline-block">
-        <a routerLink="/carrinho" title="Carrinho de Compras" routerLinkActive="active"> <i class="fa fa-shopping-cart carrinho fa-2x" aria-hidden="true"></i></a>
+        <a routerLink="/carrinho" class="mr-3" title="Carrinho de Compras" routerLinkActive="active"> <i class="fa fa-shopping-cart carrinho fa-2x" aria-hidden="true"></i></a>
         <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{auths.exibicao}}</button>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
           <button *ngIf="!auths.estaLogado" routerLink="/acesso" title="Cadastrar" routerLinkActive="active" class="dropdown-item">Criar conta<i class="fa  fa-user-circle-o carrinho" aria-hidden="true"></i></button>

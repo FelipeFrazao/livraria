@@ -6,6 +6,8 @@ export class Pedido {
         public numero: string,
         public complemento: string,
         public formaPagamento: string,
-        public itens: Array<ItemCarrinho>
+        public itens: Array<ItemCarrinho>,
+        public data: Date,
+        public total: number
     ) { }
 }

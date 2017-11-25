@@ -1,5 +1,5 @@
 img.brand {
-  width: 90px;
+  max-width: 90px;
 }
 nav div.container {
   background: none;

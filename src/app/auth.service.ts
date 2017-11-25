@@ -12,6 +12,7 @@ export class AuthService {
   public token_id: string;
   public estaLogado: boolean;
   public exibicao: string;
+  public usuario;
   constructor(private router: Router) { }
 
   public cadUser(usuario: Usuario): void {
@@ -65,7 +66,9 @@ export class AuthService {
     if (this.token_id === undefined
       &&
       localStorage.getItem('firebase:authUser:AIzaSyDd0K4OLAwJ5k3VohRfpmP6_pcYrt1_H2A:[DEFAULT]') !== null) {
-      this.token_id = localStorage.getItem('firebase:authUser:AIzaSyDd0K4OLAwJ5k3VohRfpmP6_pcYrt1_H2A:[DEFAULT]');
+      this.usuario = JSON.parse(localStorage.getItem('firebase:authUser:AIzaSyDd0K4OLAwJ5k3VohRfpmP6_pcYrt1_H2A:[DEFAULT]'));
+      console.log();
+      this.token_id = this.usuario.stsTokenManager.accessToken;
     }
     if (this.token_id === undefined) {
       this.router.navigate(['acesso/login']);

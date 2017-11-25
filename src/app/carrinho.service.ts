@@ -4,6 +4,7 @@ import { Livro } from './shared/livro.model';
 import {AuthService} from './auth.service';
 import * as firebase from 'firebase';
 import {Pedido} from './shared/pedido.model';
+import DateTimeFormat = Intl.DateTimeFormat;
 
 @Injectable()
 export class CarrinhoService {
@@ -36,7 +37,7 @@ export class CarrinhoService {
   }
   // Verificando se o item já está no carrinho, e adiciona ou atualiza a quantidade
   public adicionarAoCarrinho(livro: Livro): any {
-    this.itemCarrinho = new ItemCarrinho(livro.UID, livro.titulo, livro.descricao, livro.editora, livro.preco, 1, livro.img);
+    this.itemCarrinho = new ItemCarrinho(livro.titulo, livro.descricao, livro.editora, livro.preco, 1, livro.img);
     this.itemCarrinhoEncontrado = this.itens.find((item: ItemCarrinho) => item.titulo === this.itemCarrinho.titulo);
     console.log(this.itemCarrinho);
 
@@ -67,6 +68,8 @@ export class CarrinhoService {
     // Verifica se há algo no carrinho, caso não haja atribui o valor do localstorage e retorna
     if (this.itens.length === 0) {
       this.itens = JSON.parse(localStorage.getItem('carrinho'));
+    } else {
+      console.log(this.itens);
     }
     return this.itens;
   }
@@ -114,12 +117,14 @@ export class CarrinhoService {
         complemento: pedido.complemento,
         numero: pedido.numero,
         formaDePagamento: pedido.formaPagamento,
-        itens: pedido.itens
+        itens: pedido.itens,
+        data: new Date(),
+        total: this.totalCarrinho()
       })
       .then((response) => {
         console.log(`foi tudo de boa ${response}`);
         this.itens = [];
-        localStorage.removeItem('carrinho');
+        this.salvarCarrinho(this.itens);
       })
       .catch((erro: Error) => {
       console.log(`Deu errado ${erro}`);
