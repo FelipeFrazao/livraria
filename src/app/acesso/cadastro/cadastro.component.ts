@@ -13,7 +13,7 @@ import { AuthService } from '../../auth.service';
 })
 export class CadastroComponent implements OnInit, OnDestroy {
 
-  constructor(private as: AuthService) { }
+  constructor(public as: AuthService) { }
 
 
   // Controlador do formulário

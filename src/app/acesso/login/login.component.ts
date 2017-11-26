@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     'email': new FormControl('', Validators.email),
     'senha': new FormControl('', Validators.required)
   });
-  constructor( private  auth: AuthService) { }
+  constructor( public auth: AuthService) { }
 
   public passReset: boolean = false;
 

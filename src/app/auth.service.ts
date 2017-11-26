@@ -11,7 +11,6 @@ export class AuthService {
   public mensagem: string;
   public token_id: string;
   public estaLogado: boolean;
-  public exibicao: string;
   public usuario;
   constructor(private router: Router) { }
 
@@ -84,17 +83,7 @@ export class AuthService {
       this.usuario = JSON.parse(localStorage.getItem('firebase:authUser:AIzaSyDd0K4OLAwJ5k3VohRfpmP6_pcYrt1_H2A:[DEFAULT]'));
       this.token_id = this.usuario.stsTokenManager.accessToken;
     }
-    // Se ainda assim não houver nennhum token redireciona para a tela de login
-    if (this.token_id === undefined) {
-      this.router.navigate(['acesso/login']);
-    }
     this.estaLogado = this.token_id !== undefined;
-    // Mensagem que irá aparecer no dropdown do usuario
-    if (this.estaLogado) {
-      this.exibicao = 'Conta';
-    } else {
-      this.exibicao = 'Entrar';
-    }
     return this.estaLogado;
   }
 
