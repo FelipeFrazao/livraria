@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import {LivrosService} from "../livros.service";
+import {LivrosService} from '../livros.service';
 import { Observable } from 'rxjs/Observable';
-import { CarrinhoService } from "../carrinho.service";
-import { ChangeDetectionStrategy } from "@angular/core";
+import { CarrinhoService } from '../carrinho.service';
+import { ChangeDetectionStrategy } from '@angular/core';
 
-import {ItemCarrinho} from "../shared/item-carrinho.model";
-import {Livro} from "../shared/livro.model";
+import {ItemCarrinho} from '../model/item-carrinho.model';
+import {Livro} from '../model/livro.model';
 
 @Component({
   selector: 'app-home',
@@ -21,6 +21,9 @@ export class HomeComponent implements OnInit {
 
   constructor(private livrosService: LivrosService, private carrinhoService: CarrinhoService) { }
 
+// Otimização para performance: Ao inves de a cada atualizacação dos dados inseridos pelo NgFor, como um novo livro,
+  // o Angular destruir todos os elementos e criar de novo atualizado, ele só altera o que foi modificado,
+  // adicionando mais um elemento ou removendo
   trackByFn(index, livro) {
     return index;
   }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Livro } from './shared/livro.model';
+import { Livro } from './model/livro.model';
 import { Observable } from 'rxjs/Observable';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 

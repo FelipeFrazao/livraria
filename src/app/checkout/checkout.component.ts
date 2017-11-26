@@ -1,22 +1,25 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {CarrinhoService} from '../carrinho.service';
-import { Pedido } from '../shared/pedido.model';
-import { ItemCarrinho } from '../shared/item-carrinho.model';
+import { Pedido } from '../model/pedido.model';
+import { ItemCarrinho } from '../model/item-carrinho.model';
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })
-export class CheckoutComponent implements OnInit {
+export class CheckoutComponent implements OnInit, OnDestroy {
 
   constructor(public carrinhoService: CarrinhoService) { }
 
   public idPedidoCompra: number;
   public itensCarrinho: ItemCarrinho[] = [];
 
+
+  // Controle do formulário de compra
   public formCompra: FormGroup = new FormGroup({
     'endereco': new FormControl(null, [ Validators.required, Validators.minLength(3), Validators.maxLength(120) ]),
     'numero': new FormControl(null, [ Validators.required, Validators.minLength(1), Validators.maxLength(20) ]),
@@ -24,10 +27,14 @@ export class CheckoutComponent implements OnInit {
     'formaPagamento': new FormControl(null, [ Validators.required ])
   });
 
-  ngOnInit() {
-    this.itensCarrinho = this.carrinhoService.exibirItens();
+  // Otimização para performance: Ao inves de a cada atualizacação dos dados inseridos pelo NgFor, como um novo item no carrinho,
+  // o Angular destruir todos os elementos e criar de novo atualizado, ele só altera o que foi modificado,
+  // adicionando mais um elemento ou removendo
+  trackByFn(index, item) {
+    return index;
   }
 
+  // Pega as informações do formulário e envia o pedido para o serviço
   public confirmarCompra(): void {
     if (this.formCompra.status === 'INVALID') {
 
@@ -38,7 +45,9 @@ export class CheckoutComponent implements OnInit {
 
     } else {
       if (this.carrinhoService.exibirItens().length === 0) {
-        alert('O carrinho está vazio');
+        this.carrinhoService.exibir = true;
+        this.carrinhoService.tipo = 'warning';
+        this.carrinhoService.mensagem = `O seu carrinho está vazio!`;
       } else {
         let pedido: Pedido = new Pedido (
           this.formCompra.value.endereco,
@@ -47,16 +56,20 @@ export class CheckoutComponent implements OnInit {
           this.formCompra.value.formaPagamento,
           this.carrinhoService.exibirItens()
         );
+        this.carrinhoService.exibir = true;
+        this.carrinhoService.tipo = 'success';
+        this.carrinhoService.mensagem = `Parabéns você efetuou sua compra com sucesso!`;
         this.carrinhoService.finalizarCompra(pedido);
-
-        console.log(pedido);
-        // this.ordemCompraService.efetivarCompra(pedido)
-        //   .subscribe((idPedido: number) => {
-        //     this.idPedidoCompra = idPedido;
-        //   });
       }
     }
   }
 
+  ngOnInit() {
+    this.itensCarrinho = this.carrinhoService.exibirItens();
+  }
+
+  ngOnDestroy() {
+    this.carrinhoService.exibir = false;
+  }
 
 }

@@ -15,6 +15,7 @@ export class AuthService {
   public usuario;
   constructor(private router: Router) { }
 
+  // Cadastra o usuário no Firebase
   public cadUser(usuario: Usuario): void {
 
     firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.senha)
@@ -39,9 +40,11 @@ export class AuthService {
       });
   }
 
+  // Autentica o usuário no  Firebase
   public autenticar(email: string, senha: string): void {
     firebase.auth().signInWithEmailAndPassword(email, senha)
       .then((response: any) => {
+        this.usuario = firebase.auth().currentUser;
         firebase.auth().currentUser.getIdToken()
           .then((idToken: string) => {
             this.token_id = idToken;
@@ -58,22 +61,35 @@ export class AuthService {
   public resetPassword(email: string): any {
     let auth = firebase.auth();
     return auth.sendPasswordResetEmail(email)
-      .then(() => console.log('email sent'))
-      .catch((error) => console.log(error));
+      .then(() => {
+        this.exibir = true;
+        this.tipo = 'success';
+        this.mensagem = `Um email foi enviado para ${email} para restaurar a senha`;
+      })
+      .catch((error) => {
+        this.exibir = true;
+        this.tipo = 'danger';
+        this.mensagem = `ERRO não foi possível restaurar a senha ${error.message}`;
+      });
   }
+
+  // Checa se o usuário está autenticado e retorna o valor
   public checaLogin(): boolean {
 
+    // Verifica se há algum token em memoria ou no localstorage
     if (this.token_id === undefined
       &&
       localStorage.getItem('firebase:authUser:AIzaSyDd0K4OLAwJ5k3VohRfpmP6_pcYrt1_H2A:[DEFAULT]') !== null) {
+      // Atribui o valor do usuário e o do token do localstorage
       this.usuario = JSON.parse(localStorage.getItem('firebase:authUser:AIzaSyDd0K4OLAwJ5k3VohRfpmP6_pcYrt1_H2A:[DEFAULT]'));
-      console.log();
       this.token_id = this.usuario.stsTokenManager.accessToken;
     }
+    // Se ainda assim não houver nennhum token redireciona para a tela de login
     if (this.token_id === undefined) {
       this.router.navigate(['acesso/login']);
     }
     this.estaLogado = this.token_id !== undefined;
+    // Mensagem que irá aparecer no dropdown do usuario
     if (this.estaLogado) {
       this.exibicao = 'Conta';
     } else {
@@ -81,6 +97,8 @@ export class AuthService {
     }
     return this.estaLogado;
   }
+
+  // Desconecta o usuário do Firebase, remove do localstorage e redireciona pra tela de login
   public logout(): void  {
     firebase.auth().signOut()
       .then(() => {

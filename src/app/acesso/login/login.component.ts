@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 
-import {FormGroup, FormControl, Validators} from "@angular/forms";
-import { Usuario } from "../usuario.model";
-import { ChangeDetectionStrategy } from "@angular/core";
-import { AuthService } from "../../auth.service";
+import {FormGroup, FormControl, Validators} from '@angular/forms';
+import { Usuario } from '../usuario.model';
+import { ChangeDetectionStrategy } from '@angular/core';
+import { AuthService } from '../../auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,8 +14,8 @@ import { AuthService } from "../../auth.service";
 export class LoginComponent implements OnInit, OnDestroy {
 
   public formLogin: FormGroup = new FormGroup({
-    'email': new FormControl("", Validators.email),
-    'senha': new FormControl("", Validators.required)
+    'email': new FormControl('', Validators.email),
+    'senha': new FormControl('', Validators.required)
   });
   constructor( private  auth: AuthService) { }
 
@@ -27,13 +27,15 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
   }
+  // Envia os parametros de login do formulário de login para o serviço de autenticação
   public login(): void {
     this.auth.autenticar(
       this.formLogin.value.email,
       this.formLogin.value.senha
-      );
+    );
   }
   ngOnDestroy() {
+    // Apaga a mensagem
     this.auth.exibir = false;
   }
 }

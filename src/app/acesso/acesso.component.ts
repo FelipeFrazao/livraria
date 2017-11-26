@@ -8,14 +8,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class AcessoComponent implements OnInit {
 
-  public cadastro: boolean = true;
-
   constructor() { }
 
   ngOnInit() {
   }
-  public exibirPainel(event: string): void {
-    this.cadastro = event === 'cadastro' ? true : false;
-  }
-
 }

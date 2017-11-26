@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {ItemCarrinho} from './shared/item-carrinho.model';
-import { Livro } from './shared/livro.model';
+import {ItemCarrinho} from './model/item-carrinho.model';
+import { Livro } from './model/livro.model';
 import {AuthService} from './auth.service';
 import * as firebase from 'firebase';
-import {Pedido} from './shared/pedido.model';
+import {Pedido} from './model/pedido.model';
 import DateTimeFormat = Intl.DateTimeFormat;
 
 @Injectable()
@@ -13,33 +13,19 @@ export class CarrinhoService {
   public itens: ItemCarrinho[] = [];
   public itemCarrinho: ItemCarrinho;
   public itemCarrinhoEncontrado;
+  public exibir: boolean;
+  public tipo: string = 'danger';
+  public mensagem: string;
 
   constructor (private as: AuthService) { }
 
   public salvarCarrinho(itens: ItemCarrinho[]): void {
-
-    // if (this.as.estaLogado === true) {
-    //   let user = JSON.parse(localStorage.getItem('firebase:authUser:AIzaSyDd0K4OLAwJ5k3VohRfpmP6_pcYrt1_H2A:[DEFAULT]'));
-    //   let carrinho: any;
-    //   carrinho = itens;
-    //   firebase.firestore().doc(`usuario/${btoa(user.email)}`).collection('carrinho')
-    //     .add({
-    //       titulo: this.itemCarrinho.titulo,
-    //       preco: this.itemCarrinho.preco,
-    //       carrinho: this.itemCarrinho.carrinho,
-    //       descricao: this.itemCarrinho.descricao,
-    //       img: this.itemCarrinho.img,
-    //       editora: this.itemCarrinho.editora
-    //     });
-    // } else {
        localStorage.setItem('carrinho', JSON.stringify(itens));
-    // }
   }
   // Verificando se o item já está no carrinho, e adiciona ou atualiza a quantidade
   public adicionarAoCarrinho(livro: Livro): any {
     this.itemCarrinho = new ItemCarrinho(livro.titulo, livro.descricao, livro.editora, livro.preco, 1, livro.img);
     this.itemCarrinhoEncontrado = this.itens.find((item: ItemCarrinho) => item.titulo === this.itemCarrinho.titulo);
-    console.log(this.itemCarrinho);
 
     if (this.itemCarrinhoEncontrado) {
       this.itemCarrinhoEncontrado.carrinho ++;
@@ -69,7 +55,6 @@ export class CarrinhoService {
     if (this.itens.length === 0) {
       this.itens = JSON.parse(localStorage.getItem('carrinho'));
     } else {
-      console.log(this.itens);
     }
     return this.itens;
   }
@@ -122,12 +107,13 @@ export class CarrinhoService {
         total: this.totalCarrinho()
       })
       .then((response) => {
-        console.log(`foi tudo de boa ${response}`);
         this.itens = [];
         this.salvarCarrinho(this.itens);
       })
       .catch((erro: Error) => {
-      console.log(`Deu errado ${erro}`);
+        this.exibir = true;
+        this.tipo = 'danger';
+        this.mensagem = `Sentimos muito, ${this.as.usuario.nome} mas sua compra não pode ser efetuada: ${erro.message}`;
       });
   }
 }

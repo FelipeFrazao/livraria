@@ -4,7 +4,7 @@
       <h5>Sua Compra</h5>
       <hr />
       <div *ngIf="carrinhoService.exibirItens().length >0; else carrinhoVazio">
-        <div *ngFor="let item of carrinhoService.exibirItens()" class="form-row">
+        <div *ngFor="let item of carrinhoService.exibirItens(); trackBy: trackByFn" class="form-row">
           <div class="form-group col-sm-1">
             <img [src]="item.img" class="img-fluid">
           </div>
@@ -67,7 +67,10 @@
         </div>
       </div>
       <hr />
-      <button type="submit" class="btn btn-primary btn-lg" >Cofirmar compra</button>
+      <button class="mb-5" type="submit" class="btn btn-primary btn-lg" >Cofirmar compra</button>
+      <p>
+        <ngb-alert class="mt-5" *ngIf="this.carrinhoService.exibir" [dismissible]="false"  [type]="this.carrinhoService.tipo">{{this.carrinhoService.mensagem }}</ngb-alert>
+      </p>
     </form>
   </div>
 </div>
