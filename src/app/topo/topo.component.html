@@ -7,9 +7,9 @@
       </a>
       </div>
       <h1 routerLink="/" title="Home" routerLinkActive="active" class="text-center">Good Shelf</h1>
-      <div ngbDropdown class="d-inline-block">
+      <div ngbDropdown class="d-inline-block mr-5">
         <a routerLink="/carrinho" class="mr-3" title="Carrinho de Compras" routerLinkActive="active"> <i class="fa fa-shopping-cart carrinho fa-2x" aria-hidden="true"></i></a>
-        <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle><i class="fa  fa-user-circle-o fa-2x" aria-hidden="true"></i></button>
+        <button class="btn btn-primary mr-3" id="dropdownBasic1" ngbDropdownToggle><i class="fa  fa-user-circle-o" aria-hidden="true"></i></button>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
           <button *ngIf="!auths.estaLogado" routerLink="/acesso" title="Cadastrar" class="dropdown-item">Criar conta</button>
           <button *ngIf="!auths.estaLogado" routerLink="/acesso/login" title="Logar" class="dropdown-item">Logar</button>
