@@ -11,9 +11,17 @@ i.carrinho {
   h1 {
     font-size: 28px;
   }
+  image.img-fluid {
+    max-width: 70%;
+    height: auto;
+  }
 }
 @media (min-width: 350px) and (max-width: 404px) {
   h1  {
     font-size: 30px;
+  }
+  image.img-fluid {
+    max-width: 70%;
+    height: auto;
   }
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {ItemCarrinho} from './model/item-carrinho.model';
 import { Livro } from './model/livro.model';
 import {AuthService} from './auth.service';
@@ -7,7 +7,7 @@ import {Pedido} from './model/pedido.model';
 import DateTimeFormat = Intl.DateTimeFormat;
 
 @Injectable()
-export class CarrinhoService {
+export class CarrinhoService implements OnDestroy{
 
   // declaração
   public itens: ItemCarrinho[] = [];
@@ -26,6 +26,10 @@ export class CarrinhoService {
   public adicionarAoCarrinho(livro: Livro): any {
     this.itemCarrinho = new ItemCarrinho(livro.titulo, livro.descricao, livro.editora, livro.preco, 1, livro.img);
     this.itemCarrinhoEncontrado = this.itens.find((item: ItemCarrinho) => item.titulo === this.itemCarrinho.titulo);
+
+    this.exibir = true;
+    this.tipo = 'success';
+    this.mensagem = `Parabéns, o ${livro.titulo} foi adicionado ao carrinho`;
 
     if (this.itemCarrinhoEncontrado) {
       this.itemCarrinhoEncontrado.carrinho ++;
@@ -115,5 +119,9 @@ export class CarrinhoService {
         this.tipo = 'danger';
         this.mensagem = `Sentimos muito, ${this.as.usuario.nome} mas sua compra não pode ser efetuada: ${erro.message}`;
       });
+  }
+
+  ngOnDestroy () {
+    this.exibir = false;
   }
 }

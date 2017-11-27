@@ -1,4 +1,7 @@
   <hr />
+  <div>
+    <ngb-alert class="mt-5" *ngIf="this.carrinhoService.exibir" [dismissible]="false" [type]="this.carrinhoService.tipo">{{this.carrinhoService.mensagem }}</ngb-alert>
+  </div>
   <div class="row">
     <div class="col-md-6 mb-3" *ngFor="let livro of livros | async; trackBy: trackByFn">
       <div class="">
