@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   // variavel que irá receber os dados
   public livros: Observable<Livro[]>;
 
-  constructor(private livrosService: LivrosService, private carrinhoService: CarrinhoService) { }
+  constructor(private livrosService: LivrosService, public carrinhoService: CarrinhoService) { }
 
 // Otimização para performance: Ao inves de a cada atualizacação dos dados inseridos pelo NgFor, como um novo livro,
   // o Angular destruir todos os elementos e criar de novo atualizado, ele só altera o que foi modificado,

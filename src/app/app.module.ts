@@ -24,7 +24,6 @@ import {AuthService} from './auth.service';
 import {AuthenticationGuard} from './authentication.guard';
 import { UserComponent } from './user/user.component';
 import { CheckoutComponent } from './checkout/checkout.component';
-import { ModalCarrinhoComponent } from './modal-carrinho/modal-carrinho.component';
 
 
 export const firebaseConfig = {
@@ -48,8 +47,7 @@ export const firebaseConfig = {
     LoginComponent,
     CadastroComponent,
     UserComponent,
-    CheckoutComponent,
-    ModalCarrinhoComponent
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
